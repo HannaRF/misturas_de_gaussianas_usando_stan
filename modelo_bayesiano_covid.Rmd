@@ -19,7 +19,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Baseada no tutorial: <https://mc-stan.org/users/documentation/case-studies/boarding_school_case_study.html>
 
-E também : <https://github.com/HannaRF/Modelagem-da-COVID-19-na-Franca>
 
 ```{r, warning = FALSE, message = FALSE}
 
@@ -35,11 +34,61 @@ options (mc.cores = parallel::detectCores ())
 library(tidybayes)
 library(gridExtra)
 
+library(rmarkdown)
+
 ```
+
+```{r,echo = FALSE}
+
+data <- read.csv("owid-covid-data.csv")
+
+data <- data %>%
+    filter(iso_code == "BRA") %>% 
+    select(date,
+           new_cases) %>%
+    arrange(desc(date))
+
+paged_table(data)
+
+```
+
+```{r,echo = FALSE ,warning=FALSE}
+
+
+data %>%
+    filter( !is.na(data) ) %>% 
+    ggplot() + 
+    geom_bar(mapping = aes(x = date, y = new_cases), fill = "steelblue" , color = "steelblue", stat = "identity") +
+    labs(y = "número de casos reportados", x = "dia")
+
+
+```
+
 
 ```{r}
 
 
 
+```
+
+
+```{r}
+
+
 
 ```
+
+
+```{r}
+
+
+
+```
+
+
+```{r}
+
+
+
+```
+
