@@ -1,0 +1,45 @@
+---
+title: "Modelo bayesiano da COVID usando Stan"
+author: "Hanna Rodrigues Ferreira"
+date: "`r format(Sys.time(), '%d %B,%Y')`"
+output: 
+    html_document:
+        highlight: textmate 
+        theme: flatly 
+        toc: yes 
+        number_sections: no
+        toc_float:
+            collapsed: yes
+            smooth_scroll: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Baseada no tutorial: <https://mc-stan.org/users/documentation/case-studies/boarding_school_case_study.html>
+
+E também : <https://github.com/HannaRF/Modelagem-da-COVID-19-na-Franca>
+
+```{r, warning = FALSE, message = FALSE}
+
+library(outbreaks)
+library(tidyverse)
+
+library(rstan)
+library(gridExtra)
+rstan_options (auto_write = TRUE)
+options (mc.cores = parallel::detectCores ())
+
+
+library(tidybayes)
+library(gridExtra)
+
+```
+
+```{r}
+
+
+
+
+```
