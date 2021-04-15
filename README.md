@@ -1,2 +1,1 @@
-# modelagem-bayesiana-COVID-19-Rio
- 
+# Trabalho para Matéria de Modelagem Estatística
