@@ -1,2 +1,2 @@
-# modelagem-bayesiana-COVID-19-Rio
- 
+# Misturas de Gaussianas usando Stan
+Trabalho para Matéria de Modelagem Estatística
