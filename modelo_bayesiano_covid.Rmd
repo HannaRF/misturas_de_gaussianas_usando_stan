@@ -21,6 +21,8 @@ Baseada no tutorial: <https://mc-stan.org/users/documentation/case-studies/board
  
  <https://betanalpha.github.io/assets/case_studies/identifying_mixture_models.html>
  
+ <https://jeremy9959.net/Blog/StanMixture/>
+ 
  kaggle spotify
 
 ```{r, warning = FALSE, message = FALSE}
@@ -74,10 +76,12 @@ data %>%
 
 data %>%
   ggplot() +
-  geom_histogram(aes(x = danceability),
+  geom_histogram(aes(x = popularity),
                  fill = "steelblue",
                  color = "blue",
                  bins = 50)
+
+ggsave("popularity.png")
 
 ```
 
@@ -134,7 +138,7 @@ fit <- stan(file="mixture_gaussian.stan",data=stan_data)
 
 ```{r}
 
-print(fit)
+print(fit,separate_chains = TRUE)
 
 ```
 
@@ -142,7 +146,11 @@ print(fit)
 
 stan_dens(fit,separate_chains = TRUE)
 
+ggsave("dens_chains.png")
+
 traceplot(fit)
+
+ggsave("traceplot.png")
 
 ```
 
@@ -150,11 +158,22 @@ traceplot(fit)
 
 ```{r}
 
+params1 <- as.data.frame(extract(fit, permuted=FALSE)[,1,])
+
+p <- c(mean(params1$`mu[1]`),
+       mean(params1$`mu[2]`),
+       mean(params1$`sigma[1]`),
+       mean(params1$`sigma[2]`),
+       mean(params1$theta) )
+
+
+y_pred <- (1 - p[5]) * dnorm(x = seq(1,N,1),c(p[1],p[3])) + p[5] * dnorm(x = seq(1,N,1),c(p[2],p[4]))
+
+
 data %>%
   ggplot(aes(x = popularity)) +
   geom_histogram(fill = "steelblue",
                  color = "blue",
-                 bins = 50)+
-  geom_point(mapping = aes(y=g))
+                 bins = 50) 
 
 ```
